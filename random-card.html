@@ -180,8 +180,14 @@
             })
         }
         soundBtn.addEventListener("click", () => {
-            let utterance = new SpeechSynthesisUtterance(`${quoteText.innerText}`);
+            // 念出quotText的內文
+            let utterance = new SpeechSynthesisUtterance(`${quoteText.innerText}by${authorName.innerText}`);
             speechSynthesis.speak(utterance);
+        });
+
+        copyBtn.addEventListener("click", () => {
+            // 複製quotText的內文
+            navigator.clipboard.writeText(quoteText.innerText)
         });
 
         quoteBtn.addEventListener("click", randomQuote);

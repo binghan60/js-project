@@ -190,6 +190,13 @@
             navigator.clipboard.writeText(quoteText.innerText)
         });
 
+        twitterBtn.addEventListener("click", () => {
+            // 分享貼文
+            let tweetUrl = `https://twitter.com/intent/tweet?url=${quoteText.innerText}`;
+            // 開新視窗
+            window.open(tweetUrl, "_blank");
+        });
+
         quoteBtn.addEventListener("click", randomQuote);
     </script>
 </body>

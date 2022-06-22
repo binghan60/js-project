@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: url(/eat-what-background.jpg);
+            background-position: 0 70%;
+        }
+
+        .wrapper {
+            width: 605px;
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px 30px 25px;
+        }
+
+        .wrapper header {
+            font-size: 35px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .wrapper .content {
+            margin: 35px 0;
+        }
+
+        .content .quote-area {
+            display: flex;
+            justify-content: center;
+        }
+
+        .quote-area i {
+            font-size: 15px;
+        }
+
+        .quote-area i:first-child {
+            margin: 3px 10px 0 0;
+        }
+
+        .quote-area i:last-child {
+            display: flex;
+            align-items: flex-end;
+            margin: 0 0 3px 10px;
+        }
+
+        .quote-area .quote {
+            font-size: 22px;
+            text-align: center;
+            word-break: break-all;
+        }
+
+        .content .author {
+            display: flex;
+            font-size: 18px;
+            font-style: italic;
+            margin-top: 20px;
+            justify-content: flex-end;
+        }
+
+        .author span:first-child {
+            margin: -7px 5px 0 0;
+            /* 字體 */
+        }
+
+        .wrapper .buttons {
+            border-top: 1px solid #ccc;
+        }
+
+        .buttons .features {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            justify-content: space-between;
+        }
+
+        .features ul {
+            display: flex;
+        }
+
+        .features ul li {
+            list-style: none;
+            margin: 0 5px;
+            height: 47px;
+            width: 47px;
+            display: flex;
+            cursor: pointer;
+            color: #5372F0;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            border: 2px solid #5372F0;
+            transition: all 0.3s ease;
+        }
+
+        .features ul li:hover {
+            color: #fff;
+            background: #5372F0;
+        }
+
+        .features button {
+            border: none;
+            outline: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 13px 22px;
+            border-radius: 30px;
+            background: #5372F0;
+        }
+
+        button.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>中午我想來點</header>
+        <div class="content">
+            <div class="quote-area">
+                <i class="fas fa-quote-left"></i>
+                <p class="quote">讓我想想...</p>
+                <i class="fas fa-quote-right"></i>
+            </div>
+            <div class="author">
+                <span>__</span>
+                <span class="name">竹佑</span>
+            </div>
+        </div>
+        <div class="buttons">
+            <div class="features">
+                <ul>
+                    <li class="sound"><i class="fas fa-volume-up"></i></li>
+                    <li class="copy"><i class="fas fa-copy"></i></li>
+                    <li class="twitter"><i class="fab fa-twitter"></i></li>
+                </ul>
+                <button>新訊息</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // 隨機列表
+
+        var quoteslist = ["光復牛肉麵", "咖哩飯", "健康餐", "餵我早午餐", "八方雲集", "元氣家族", "好想見麵"];
+
+        count = quoteslist.length - 1;
+
+
+        function getQuote() {
+            var randomQuote = quoteslist[Math.floor(Math.random() * quoteslist.length)];
+            console.log(Math.random() * quoteslist.length);
+            quoteText.innerHTML = "<em>" + randomQuote + "</em>";
+        }
+
+
+        // ---------------------------------分隔線----------------------------------------
+
+        const quoteText = document.querySelector(".quote");
+        authorName = document.querySelector(".author .name")
+        quoteBtn = document.querySelector("button");
+        soundBtn = document.querySelector(".sound")
+        copyBtn = document.querySelector(".copy")
+        twitterBtn = document.querySelector(".twitter")
+
+        // 每日小語
+        // function randomQuote() {
+        //     quoteBtn.classList.add("loading");
+        //     quoteBtn.innerText = "Loading Quote..."
+        //     fetch("https://api.quotable.io/random").then(res => res.json()).then(result => {
+        //         console.log(result)
+        //         quoteText.innerText = result.content;
+        //         authorName.innerText = result.author;
+        //         quoteBtn.innerText = "New Quote"
+        //         quoteBtn.classList.remove("loading");
+
+        //     })
+        // }
+        soundBtn.addEventListener("click", () => {
+            // 念出quotText的內文
+            let utterance = new SpeechSynthesisUtterance(`${quoteText.innerText}by${authorName.innerText}`);
+            speechSynthesis.speak(utterance);
+        });
+
+        copyBtn.addEventListener("click", () => {
+            // 複製quotText的內文
+            navigator.clipboard.writeText(quoteText.innerText)
+        });
+
+
+        twitterBtn.addEventListener("click", () => {
+            // 分享貼文
+            let tweetUrl = `https://twitter.com/intent/tweet?url=${quoteText.innerText}`;
+            // 開新視窗
+            window.open(tweetUrl, "_blank");
+        });
+
+
+
+        quoteBtn.addEventListener("click", getQuote);
+    </script>
+</body>
+
+</html>

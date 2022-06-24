@@ -142,10 +142,10 @@
                 <p class="quote">讓我想想...</p>
                 <i class="fas fa-quote-right"></i>
             </div>
-            <div class="author">
+            <!-- <div class="author">
                 <span>__</span>
                 <span class="name">竹佑</span>
-            </div>
+            </div> -->
         </div>
         <div class="buttons">
             <div class="features">
@@ -163,7 +163,7 @@
 
         // 隨機列表
 
-        var quoteslist = ["光復牛肉麵", "咖哩飯", "健康餐", "餵我早午餐", "八方雲集", "元氣家族", "好想見麵"];
+        var quoteslist = ["光復牛肉麵", "咖哩飯", "健康餐", "餵我早午餐", "八方雲集", "元氣家族", "好想見麵","吉野家","叉燒飯"];
 
         count = quoteslist.length - 1;
 
@@ -199,7 +199,7 @@
         // }
         soundBtn.addEventListener("click", () => {
             // 念出quotText的內文
-            let utterance = new SpeechSynthesisUtterance(`${quoteText.innerText}by${authorName.innerText}`);
+            let utterance = new SpeechSynthesisUtterance(`${quoteText.innerText}`);
             speechSynthesis.speak(utterance);
         });
 
